@@ -1,0 +1,230 @@
+# Chapter: Basic Tools
+
+
+## Instalando quarto, python, julia 
+
+Puedes usar Quarto en GitHub Codespaces de manera excelente, ya que ofrece un entorno preconfigurado basado en VS Code que elimina la instalación local.
+
+- Crear un nuevo repo en GitHub
+
+- Abre codespace en el main
+
+- Lo primero es tener instalada la extensión “Quarto” de quarto-dev en tu VS Code o codespaces (el ícono de cuadrícula en la barra lateral izquierda o Ctrl+Shift+X). Esta extensión es la que provee el soporte de lenguaje, incluyendo el resaltado de sintaxis para los bloques de código de Python, R, Julia y otros
+
+- Para que el resaltado y la inteligencia de código funcionen perfectamente para Python y Julia, necesitas tener instaladas las extensiones de esos lenguajes
+  
+    - Para Python: La extensión oficial de Python de Microsoft (ms-python.python).
+    - Para Julia: La extensión oficial de Julia de julialang (julialang.language-julia).
+
+- Ahora es importante instalar quarto (prueba hasta quarto check). Usa chatgpt para buscar la versión actualizada y como instalar
+
+```{.bash}
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.10.15/quarto-1.10.15-linux-amd64.deb
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ sudo dpkg -i quarto-1.10.15-linux-amd64.deb
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ quarto --version
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ quarto check
+```
+
+- Usualmente python ya viene instalado, si quieres instalar una versión más actualizada vete a tomar por culo y busca la versión que quieres en chatgpt jaja. Instalamos jupyter luego. 
+
+```{.bash}
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ pip install jupyter
+```
+
+- Instalaremos la versión más estable de Julia
+
+```{.bash}
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ curl -fsSL https://install.julialang.org | sh
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ source ~/.bashrc
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ julia --version
+julia version 1.12.6
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ julia
+using Pkg
+Pkg.add("IJulia")
+```
+
+- Si eres un pesaooo y quieres la última versión de la web estable de Julia, aqui tienes los comandos gilipollas jaja.
+
+```{.bash}
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ wget https://julialang-s3.julialang.org/bin/linux/x64/1.12/julia-1.12.1-linux-x86_64.tar.gz
+
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ tar -xzf julia-1.12.1-linux-x86_64.tar.gz
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ sudo mv julia-1.12.1 /opt/julia
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ echo 'export PATH="/opt/julia/bin:$PATH"' >> ~/.bashrc
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ source ~/.bashrc
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ julia --version
+```
+
+- Como vas a desarrollar un libro técnico de Data Science, Python, Julia, SQL, Power BI y mercados eléctricos durante bastante tiempo, conviene que no instales Quarto y Julia manualmente cada vez que crees un Codespace. Lo más práctico es crear un .devcontainer que instale automáticamente. De esa forma, tendrás un entorno completamente reproducible: cualquier Codespace que abras tendrá automáticamente Quarto, Julia, Python, Jupyter y las extensiones de VS Code sin ejecutar ningún comando manual.
+
+En la raíz de tu repositorio crea la carpeta:
+
+```{text}
+.devcontainer/
+├── devcontainer.json
+├── Dockerfile
+└── postCreate.sh
+```
+
+**devcontainer.json**
+
+```{.bash}
+{
+    "name": "Quarto Data Science Book",
+
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python3",
+                "jupyter.askForKernelRestart": false,
+                "editor.wordWrap": "on"
+            },
+
+            "extensions": [
+                "quarto.quarto",
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "julialang.language-julia",
+                "yzhang.markdown-all-in-one",
+                "DavidAnson.vscode-markdownlint",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "eamodio.gitlens"
+            ]
+        }
+    },
+
+    "postCreateCommand": "bash .devcontainer/postCreate.sh",
+
+    "remoteUser": "vscode"
+}
+```
+
+**Dockerfile**
+
+```{.bash}
+FROM mcr.microsoft.com/devcontainers/python:3.12
+
+RUN apt-get update && \
+    apt-get install -y \
+        wget \
+        curl \
+        git \
+        unzip \
+        build-essential \
+        pandoc \
+        texlive-latex-base \
+        texlive-fonts-recommended \
+        texlive-latex-extra \
+        texlive-xetex \
+        fonts-dejavu && \
+    apt-get clean
+```
+
+No instalamos Quarto ni Julia aquí porque es mucho más sencillo mantenerlos actualizados desde el script.
+
+**postCreate.sh**
+
+```{.bash}
+#!/bin/bash
+
+set -e
+
+echo "====================================="
+echo "Installing Quarto"
+echo "====================================="
+
+QUARTO_VERSION="1.10.15"
+
+wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb
+
+sudo dpkg -i quarto-${QUARTO_VERSION}-linux-amd64.deb
+
+rm quarto-${QUARTO_VERSION}-linux-amd64.deb
+
+echo "====================================="
+echo "Installing Julia"
+echo "====================================="
+
+curl -fsSL https://install.julialang.org | sh -s -- --yes
+
+export PATH="$HOME/.juliaup/bin:$PATH"
+
+echo 'export PATH="$HOME/.juliaup/bin:$PATH"' >> ~/.bashrc
+
+source ~/.bashrc
+
+echo "====================================="
+echo "Installing Python packages"
+echo "====================================="
+
+pip install --upgrade pip
+
+pip install \
+    jupyter \
+    jupyterlab \
+    notebook \
+    numpy \
+    scipy \
+    pandas \
+    matplotlib \
+    seaborn \
+    scikit-learn \
+    plotly \
+    polars \
+    pyarrow \
+    duckdb
+
+echo "====================================="
+echo "Installing Julia packages"
+echo "====================================="
+
+~/.juliaup/bin/julia <<EOF
+using Pkg
+
+Pkg.add([
+    "IJulia",
+    "DataFrames",
+    "CSV",
+    "Plots",
+    "Statistics",
+    "Distributions",
+    "GLM",
+    "DataFramesMeta",
+    "DuckDB"
+])
+
+EOF
+
+echo "====================================="
+echo "Checking installations"
+echo "====================================="
+
+quarto --version
+
+python --version
+
+~/.juliaup/bin/julia --version
+
+quarto check
+
+echo "Environment ready!"
+```
+
+- Dar permisos al script, solo la primera vez.
+
+```{.bash}
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ chmod +x .devcontainer/postCreate.sh
+```
+
+- Ahora sí mamón, esto es super importante para que guardes en GitHub todos los cambios que hiciste en tus ficheros y en tu repo, no lo olvides. 
+
+```{.bash}
+git add .
+git commit -m "Add devcontainer"
+git push
+```

@@ -1,0 +1,33 @@
+{
+    "name": "Quarto Data Science Book",
+
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python3",
+                "jupyter.askForKernelRestart": false,
+                "editor.wordWrap": "on"
+            },
+
+            "extensions": [
+                "quarto.quarto",
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "julialang.language-julia",
+                "yzhang.markdown-all-in-one",
+                "DavidAnson.vscode-markdownlint",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "eamodio.gitlens"
+            ]
+        }
+    },
+
+    "postCreateCommand": "bash .devcontainer/postCreate.sh",
+
+    "remoteUser": "vscode"
+}
