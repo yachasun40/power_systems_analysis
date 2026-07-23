@@ -1,0 +1,132 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Power System Analysis",
+    "section": "",
+    "text": "1 Bienvenida\nEste es el libro web creado con Quarto. Se está tomando en cuenta los cursos de Statistics using python WisconsinX, Programming de Columbia, curso de PROBABILIDADES de MIT y Harvard\n\nChapter: Basic Tools\n\nInstalando quarto, python, julia\n\nCapítulo: Intro to Data Science with Python\nCapítulo: SQL fundamentals\nCapítulo: Basic Statistics Using Python\nCapítulo: Introduction to Probability\nData Visualization and Cloud Technologies\nCapítulo: Data Science with R",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Bienvenida</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo1.html",
+    "href": "capitulo1.html",
+    "title": "2  Chapter: Basic Tools",
+    "section": "",
+    "text": "2.1 Instalando quarto, python, julia\nPuedes usar Quarto en GitHub Codespaces de manera excelente, ya que ofrece un entorno preconfigurado basado en VS Code que elimina la instalación local.\nEn la raíz de tu repositorio crea la carpeta:\ndevcontainer.json\nDockerfile\nNo instalamos Quarto ni Julia aquí porque es mucho más sencillo mantenerlos actualizados desde el script.\npostCreate.sh",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Chapter: Basic Tools</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo1.html#instalando-quarto-python-julia",
+    "href": "capitulo1.html#instalando-quarto-python-julia",
+    "title": "2  Chapter: Basic Tools",
+    "section": "",
+    "text": "Crear un nuevo repo en GitHub\nAbre codespace en el main\nLo primero es tener instalada la extensión “Quarto” de quarto-dev en tu VS Code o codespaces (el ícono de cuadrícula en la barra lateral izquierda o Ctrl+Shift+X). Esta extensión es la que provee el soporte de lenguaje, incluyendo el resaltado de sintaxis para los bloques de código de Python, R, Julia y otros\nPara que el resaltado y la inteligencia de código funcionen perfectamente para Python y Julia, necesitas tener instaladas las extensiones de esos lenguajes\n\nPara Python: La extensión oficial de Python de Microsoft (ms-python.python).\nPara Julia: La extensión oficial de Julia de julialang (julialang.language-julia).\n\nAhora es importante instalar quarto (prueba hasta quarto check). Usa chatgpt para buscar la versión actualizada y como instalar\n\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.10.15/quarto-1.10.15-linux-amd64.deb\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ sudo dpkg -i quarto-1.10.15-linux-amd64.deb\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ quarto --version\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ quarto check\n\nUsualmente python ya viene instalado, si quieres instalar una versión más actualizada vete a tomar por culo y busca la versión que quieres en chatgpt jaja. Instalamos jupyter luego.\n\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ pip install jupyter\n\nInstalaremos la versión más estable de Julia\n\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ curl -fsSL https://install.julialang.org | sh\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ source ~/.bashrc\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ julia --version\njulia version 1.12.6\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ julia\nusing Pkg\nPkg.add(\"IJulia\")\n\nSi eres un pesaooo y quieres la última versión de la web estable de Julia, aqui tienes los comandos gilipollas jaja.\n\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ wget https://julialang-s3.julialang.org/bin/linux/x64/1.12/julia-1.12.1-linux-x86_64.tar.gz\n\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ tar -xzf julia-1.12.1-linux-x86_64.tar.gz\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ sudo mv julia-1.12.1 /opt/julia\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ echo 'export PATH=\"/opt/julia/bin:$PATH\"' &gt;&gt; ~/.bashrc\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ source ~/.bashrc\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ julia --version\n\nComo vas a desarrollar un libro técnico de Data Science, Python, Julia, SQL, Power BI y mercados eléctricos durante bastante tiempo, conviene que no instales Quarto y Julia manualmente cada vez que crees un Codespace. Lo más práctico es crear un .devcontainer que instale automáticamente. De esa forma, tendrás un entorno completamente reproducible: cualquier Codespace que abras tendrá automáticamente Quarto, Julia, Python, Jupyter y las extensiones de VS Code sin ejecutar ningún comando manual.\n\n\n.devcontainer/\n├── devcontainer.json\n├── Dockerfile\n└── postCreate.sh\n\n{\n    \"name\": \"Quarto Data Science Book\",\n\n    \"build\": {\n        \"dockerfile\": \"Dockerfile\"\n    },\n\n    \"customizations\": {\n        \"vscode\": {\n            \"settings\": {\n                \"python.defaultInterpreterPath\": \"/usr/local/bin/python3\",\n                \"jupyter.askForKernelRestart\": false,\n                \"editor.wordWrap\": \"on\"\n            },\n\n            \"extensions\": [\n                \"quarto.quarto\",\n                \"ms-python.python\",\n                \"ms-toolsai.jupyter\",\n                \"julialang.language-julia\",\n                \"yzhang.markdown-all-in-one\",\n                \"DavidAnson.vscode-markdownlint\",\n                \"GitHub.copilot\",\n                \"GitHub.copilot-chat\",\n                \"eamodio.gitlens\"\n            ]\n        }\n    },\n\n    \"postCreateCommand\": \"bash .devcontainer/postCreate.sh\",\n\n    \"remoteUser\": \"vscode\"\n}\n\nFROM mcr.microsoft.com/devcontainers/python:3.12\n\nRUN apt-get update && \\\n    apt-get install -y \\\n        wget \\\n        curl \\\n        git \\\n        unzip \\\n        build-essential \\\n        pandoc \\\n        texlive-latex-base \\\n        texlive-fonts-recommended \\\n        texlive-latex-extra \\\n        texlive-xetex \\\n        fonts-dejavu && \\\n    apt-get clean\n\n\n#!/bin/bash\n\nset -e\n\necho \"=====================================\"\necho \"Installing Quarto\"\necho \"=====================================\"\n\nQUARTO_VERSION=\"1.10.15\"\n\nwget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb\n\nsudo dpkg -i quarto-${QUARTO_VERSION}-linux-amd64.deb\n\nrm quarto-${QUARTO_VERSION}-linux-amd64.deb\n\necho \"=====================================\"\necho \"Installing Julia\"\necho \"=====================================\"\n\ncurl -fsSL https://install.julialang.org | sh -s -- --yes\n\nexport PATH=\"$HOME/.juliaup/bin:$PATH\"\n\necho 'export PATH=\"$HOME/.juliaup/bin:$PATH\"' &gt;&gt; ~/.bashrc\n\nsource ~/.bashrc\n\necho \"=====================================\"\necho \"Installing Python packages\"\necho \"=====================================\"\n\npip install --upgrade pip\n\npip install \\\n    jupyter \\\n    jupyterlab \\\n    notebook \\\n    numpy \\\n    scipy \\\n    pandas \\\n    matplotlib \\\n    seaborn \\\n    scikit-learn \\\n    plotly \\\n    polars \\\n    pyarrow \\\n    duckdb\n\necho \"=====================================\"\necho \"Installing Julia packages\"\necho \"=====================================\"\n\n~/.juliaup/bin/julia &lt;&lt;EOF\nusing Pkg\n\nPkg.add([\n    \"IJulia\",\n    \"DataFrames\",\n    \"CSV\",\n    \"Plots\",\n    \"Statistics\",\n    \"Distributions\",\n    \"GLM\",\n    \"DataFramesMeta\",\n    \"DuckDB\"\n])\n\nEOF\n\necho \"=====================================\"\necho \"Checking installations\"\necho \"=====================================\"\n\nquarto --version\n\npython --version\n\n~/.juliaup/bin/julia --version\n\nquarto check\n\necho \"Environment ready!\"\n\nDar permisos al script, solo la primera vez.\n\n@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ chmod +x .devcontainer/postCreate.sh\n\nCuando GitHub detecte la carpeta .devcontainer, al crear un nuevo Codespace:\n\nConstruirá el contenedor.\nEjecutará postCreate.sh.\nInstalará automáticamente:\n\nAhora sí mamón, esto es super importante para que guardes en GitHub todos los cambios que hiciste en tus ficheros y en tu repo, no lo olvides. Elimina primero los instaladores .deb que descargaste en codespaces, ya que GitHub no permite archivos mayores de 100 MB.\n\ngit add .\ngit commit -m \"Add devcontainer\"\ngit push\n\ncuando ya tengas la estructura básica de tu libro usa los dos últimos comandos del siguiente bloque:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Chapter: Basic Tools</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo2.html",
+    "href": "capitulo2.html",
+    "title": "3  Capítulo: Intro to Data Science with Python",
+    "section": "",
+    "text": "3.1 Working with Data in Python",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Capítulo: Intro to Data Science with Python</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo2.html#working-with-data-in-python",
+    "href": "capitulo2.html#working-with-data-in-python",
+    "title": "3  Capítulo: Intro to Data Science with Python",
+    "section": "",
+    "text": "3.1.1 Reading and Writing Files with Open\nFile handling is an essential aspect of programming, and Python provides built-in functions to interact with files. This guide will explore how to use Python’s open function to read the text files (‘.txt’ files).\nThere are two methods for opening the file using the file handling concept.\n\nUsing the open() function without a context manager.\n\nFile path: The file path parameter consists of the filename and directory where the file is located.\nMode: The mode parameter specifies the purpose of opening the file, such as ‘r’ for reading, ‘w’ for writing, or ‘a’ for appending.\n# Open the file in read ('r') mode\nfile = open('file.txt', 'r')",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Capítulo: Intro to Data Science with Python</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo3.html",
+    "href": "capitulo3.html",
+    "title": "4  Capítulo: SQL fundamentals",
+    "section": "",
+    "text": "4.1 Introduction to Databases and SQL\nWelcome to the “SQL Fundamentals” course! In today’s world, data is a critical business asset. But, if we can’t tap into that data, if we can’t access and manipulate it, it’s wasted. SQL solves that problem. It’s a language of databases. It allows you to communicate with a database and get what you need. It’s a critical skill in every analyst or data scientist’s toolbox, and it appears on most job postings for those positions. You’re going to develop that skill within this course. By the end, you will learn to construct a wide variety of SQL statements. By the end, you will learn to construct a wide variety of SQL statements. We start with the basics, and then move to more advanced concepts – like joins, subqueries, common table expressions, and window functions. Finally, you’ll also learn how to optimize your SQL statements so they’re efficient even on extremely large data sets.\nReview the Course Learning Outcomes\nBy the end of this course, you’ll be able to…\nLearning Objectives:\nBy the end of this section, you’ll be able to…\nYou get to explore Snowflake, which is one of the most popular cloud databases, in addition to learning about SQL. (Snowflake is the tool that we will use in this course to write our SQL statements.) Snowflake is a great tool to add to your resume, and it is used by lots of companies: AT&T, Disney, DoorDash, Capital One, HP, Deloitte, PwC, Pepsi, Siemens, and many more!",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Capítulo: SQL fundamentals</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo3.html#introduction-to-databases-and-sql",
+    "href": "capitulo3.html#introduction-to-databases-and-sql",
+    "title": "4  Capítulo: SQL fundamentals",
+    "section": "",
+    "text": "Get an overview of the course.\nLearn about databases and the SQL language.\nStart working with Snowflake, a popular cloud database.\nRun our first SQL statements.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Capítulo: SQL fundamentals</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo4.html",
+    "href": "capitulo4.html",
+    "title": "5  Capítulo: Basic Statistics Using Python",
+    "section": "",
+    "text": "5.1 Descriptive Statistics",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Capítulo: Basic Statistics Using Python</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo4.html#descriptive-statistics",
+    "href": "capitulo4.html#descriptive-statistics",
+    "title": "5  Capítulo: Basic Statistics Using Python",
+    "section": "",
+    "text": "5.1.1 Overview\nLearning Objectives:\nBy the end of this section, you’ll be able to…\n\nCalculate descriptive statistics.\nIdentify and create appropriate graphs for given situations.\nPractice cleaning a dataset.\n\nData Exploration Subjects\nEvery analyst and data scientist needs to have a solid foundation in statistics. A key component of that is being able to calculate statistics, create graphs, and clean data.\n\nThis module covers four essential topics in data exploration:\nDescriptive Statistics - Measuring and understanding business data\nBasic Graphing - Visualizing data patterns and relationships\nData Cleaning - Improving data quality for analysis\nData Wrangling - Preparing and organizing data\n\n\n5.1.1.1 Descriptive Statistics",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Capítulo: Basic Statistics Using Python</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo5.html",
+    "href": "capitulo5.html",
+    "title": "6  Capítulo: Probability for Computer Science",
+    "section": "",
+    "text": "6.1 Introduction to Probability\nThe idea of supply chains is managing flows. And flows of what? Flows of product or material, flows of information, and flows of money.\nCourse Overview and Basic Tools\nstarts by providing a fundamental grounding in combinatorics, and then quickly moves into the basics of probability theory. We will then cover many essential concepts in probability theory, including particular probability distributions, properties of probabilities, and mathematical tools for analyzing probabilities. Finally, the last third of the class will focus on data analysis and machine learning as a means for seeing direct applications of probability in this exciting and quickly growing subfield of computer science.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Capítulo: Probability for Computer Science</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo5.html#introduction-to-probability",
+    "href": "capitulo5.html#introduction-to-probability",
+    "title": "6  Capítulo: Probability for Computer Science",
+    "section": "",
+    "text": "Core Probability\n\nSample space\nEvents\nIndependence\nConditional probabilty\n\nRepeated Trials\n\nBernoulli\nBinomial\nPoisson\nGeometric\nHypergeometric\n\nRandom Variables and Probability Distributions\n\nDiscrete Random Variables\nContinuous Random Variables\n\nLaw of Large Numbers\n\nCentral Limit Theorem\n\nProbabilistic Models\nUncertainty Theory\nMachine Learning\n\n\n6.1.1 Python for Probability\nBasic Syntax\nTo run Python:",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Capítulo: Probability for Computer Science</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo6.html",
+    "href": "capitulo6.html",
+    "title": "7  Data Visualization and Cloud Technologies",
+    "section": "",
+    "text": "In this course, we learn to use data visualization and cloud computing to support business analytics. In the cloud computing section, we use the cloud to build scalable data warehouses, analyze big data, and develop machine learning models. In the data visualization section, we create and share compelling visualizations that enhance decision-making.\nIn the first half of the course, you’ll learn how to tell compelling stories using data visualization. Then in the second half, we’ll learning about cloud computing. You’ll set up and manage a cloud data warehouse, build and deploy a machine learning model in the cloud, and analyze big data in a cloud environment. These skills will prepare you to add value to your career right away.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization and Cloud Technologies</span>"
+    ]
+  },
+  {
+    "objectID": "capitulo7.html",
+    "href": "capitulo7.html",
+    "title": "8  Capítulo: Data Science with R",
+    "section": "",
+    "text": "8.1 Data Science\nData science is a multidisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data. It combines aspects of statistics, computer science, and domain expertise to analyze and interpret complex data sets. Data scientists use various tools and techniques to clean, process, and analyze data, often employing machine learning algorithms to make predictions or uncover patterns. The goal of data science is to turn data into actionable insights that can inform decision-making and drive business strategies. It is widely used in various industries, including finance, healthcare, marketing, and technology, to solve complex problems and improve outcomes.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Capítulo: Data Science with R</span>"
+    ]
+  }
+]
