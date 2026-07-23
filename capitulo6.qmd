@@ -1,0 +1,5 @@
+# Data Visualization and Cloud Technologies
+
+In this course, we learn to use data visualization and cloud computing to support business analytics.  In the cloud computing section, we use the cloud to build scalable data warehouses, analyze big data, and develop machine learning models.  In the data visualization section, we create and share compelling visualizations that enhance decision-making.
+
+In the first half of the course, you'll learn how to tell compelling stories using data visualization. Then in the second half, we'll learning about cloud computing. You'll set up and manage a cloud data warehouse, build and deploy a machine learning model in the cloud, and analyze big data in a cloud environment. These skills will prepare you to add value to your career right away.

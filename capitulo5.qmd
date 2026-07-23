@@ -1,0 +1,36 @@
+# Capítulo: Probability for Computer Science
+
+## Introduction to Probability
+
+The idea of **supply chains** is managing flows. And flows of what? Flows of product or material, flows of information, and flows of money.
+
+<font color="#fc03a5">Course Overview and Basic Tools</font>
+
+starts by providing a fundamental grounding in combinatorics, and then quickly moves into the basics of probability theory. We will then cover many essential concepts in probability theory, including particular probability distributions, properties of probabilities, and mathematical tools for analyzing probabilities. Finally, the last third of the class will focus on data analysis and machine learning as a means for seeing direct applications of probability in this exciting and quickly growing subfield of computer science. 
+
+- Core Probability
+    - Sample space
+    - Events
+    - Independence
+    - Conditional probabilty
+- Repeated Trials
+    - Bernoulli
+    - Binomial
+    - Poisson
+    - Geometric
+    - Hypergeometric
+- Random Variables and Probability Distributions
+    - Discrete Random Variables
+    - Continuous Random Variables
+- Law of Large Numbers
+    - Central Limit Theorem
+- Probabilistic Models
+- Uncertainty Theory
+- Machine Learning
+
+
+### Python for Probability
+
+**Basic Syntax**
+
+To run Python:

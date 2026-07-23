@@ -1,0 +1,23 @@
+# Bienvenida
+
+Este es el libro web creado con **Quarto**.  Se está tomando en cuenta los cursos de Statistics using python WisconsinX, Programming de Columbia, curso de PROBABILIDADES de MIT y Harvard
+
+
+- [Chapter: Basic Tools](capitulo1.qmd)
+  - [Instalando quarto, python, julia](capitulo1.qmd#instalando-quarto-python-julia)
+
+- [Capítulo: Intro to Data Science with Python](capitulo2.qmd)
+
+
+- [Capítulo: SQL fundamentals](capitulo3.qmd)
+
+
+- [Capítulo: Basic Statistics Using Python](capitulo4.qmd)
+
+  
+- [Capítulo: Introduction to Probability](capitulo5.qmd)
+
+
+- [Data Visualization and Cloud Technologies](capitulo6.qmd)
+
+- [Capítulo: Data Science with R](capitulo7.qmd)

@@ -1,0 +1,30 @@
+# Capítulo: Basic Statistics Using Python
+
+
+## Descriptive Statistics
+
+### Overview
+
+**Learning Objectives:**
+
+By the end of this section, you'll be able to...
+
+- Calculate descriptive statistics.
+- Identify and create appropriate graphs for given situations.
+- Practice cleaning a dataset.
+
+**Data Exploration Subjects**
+
+Every analyst and data scientist needs to have a solid foundation in statistics.  A key component of that is being able to calculate statistics, create graphs, and clean data.  
+
+1. This module covers four essential topics in data exploration:
+
+2. Descriptive Statistics - Measuring and understanding business data
+
+3. Basic Graphing - Visualizing data patterns and relationships
+
+4. Data Cleaning - Improving data quality for analysis
+
+5. Data Wrangling - Preparing and organizing data
+
+#### Descriptive Statistics

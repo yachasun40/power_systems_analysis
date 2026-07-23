@@ -1,0 +1,25 @@
+# Capítulo: SQL fundamentals
+
+Welcome to the “SQL Fundamentals” course! In today's world, data is a critical business asset. But, if we can't tap into that data, if we can't access and manipulate it, it’s wasted. SQL solves that problem. It's a language of databases. It allows you to communicate with a database and get what you need. It's a critical skill in every analyst or data scientist's toolbox, and it appears on most job postings for those positions. You're going to develop that skill within this course. By the end, you will learn to construct a wide variety of SQL statements.
+By the end, you will learn to construct a wide variety of SQL statements. We start with the basics, and then move to more advanced concepts -- like joins, subqueries, common table expressions, and window functions. Finally, you'll also learn how to optimize your SQL statements so they're efficient even on extremely large data sets. 
+
+**Review the Course Learning Outcomes**
+
+By the end of this course, you'll be able to...
+
+- Construct a variety of SQL statements.
+- Query and prepare data in response to business questions.
+- Design a database to meet a business need and technical requirements.
+
+## Introduction to Databases and SQL
+
+**Learning Objectives:**
+
+By the end of this section, you'll be able to...
+
+- Get an overview of the course.
+- Learn about databases and the SQL language.
+- Start working with Snowflake, a popular cloud database.
+- Run our first SQL statements.
+
+You get to explore Snowflake, which is one of the most popular cloud databases, in addition to learning about SQL. (Snowflake is the tool that we will use in this course to write our SQL statements.)  Snowflake is a great tool to add to your resume, and it is used by lots of companies:  AT&T, Disney, DoorDash, Capital One, HP, Deloitte, PwC, Pepsi, Siemens, and many more!

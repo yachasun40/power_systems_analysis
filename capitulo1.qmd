@@ -221,6 +221,12 @@ echo "Environment ready!"
 @yachasun40 ➜ /workspaces/power_systems_analysis (main) $ chmod +x .devcontainer/postCreate.sh
 ```
 
+- Cuando GitHub detecte la carpeta .devcontainer, al crear un nuevo Codespace:
+
+    - Construirá el contenedor.
+    - Ejecutará postCreate.sh.
+    - Instalará automáticamente:
+
 - Ahora sí mamón, esto es super importante para que guardes en GitHub todos los cambios que hiciste en tus ficheros y en tu repo, no lo olvides. Elimina primero los instaladores .deb que descargaste en codespaces, ya que GitHub no permite archivos mayores de 100 MB.
 
 ```{.bash}
@@ -228,3 +234,7 @@ git add .
 git commit -m "Add devcontainer"
 git push
 ```
+
+
+- cuando ya tengas la estructura básica de tu libro usa los dos últimos comandos del siguiente bloque:
+

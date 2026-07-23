@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "Power System Analysis"
+  author: "Jean Paúl Lozano"
+  date: today
+  chapters:
+    - index.qmd
+    - capitulo1.qmd
+    - capitulo2.qmd
+    - capitulo3.qmd
+    - capitulo4.qmd
+    - capitulo5.qmd
+    - capitulo6.qmd
+    - capitulo7.qmd
+
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2   # hasta subtítulos de nivel 2 (##)

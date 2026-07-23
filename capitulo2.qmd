@@ -1,0 +1,20 @@
+# Capítulo: Intro to Data Science with Python
+
+## Working with Data in Python
+
+### Reading and Writing Files with Open
+
+File handling is an essential aspect of programming, and Python provides built-in functions to interact with files. This guide will explore how to use Python's `open` function to read the text files ('.txt' files).
+
+There are two methods for opening the file using the file handling concept.
+
+1. Using the `open()` function without a context manager.
+
+`File path:` The file path parameter consists of the filename and directory where the file is located.
+
+`Mode:` The mode parameter specifies the purpose of opening the file, such as 'r' for reading, 'w' for writing, or 'a' for appending.
+
+```{.python}
+# Open the file in read ('r') mode
+file = open('file.txt', 'r')
+```
