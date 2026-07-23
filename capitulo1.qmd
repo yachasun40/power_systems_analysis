@@ -227,7 +227,7 @@ echo "Environment ready!"
     - Ejecutará postCreate.sh.
     - Instalará automáticamente:
 
-- Ahora sí mamón, esto es super importante para que guardes en GitHub todos los cambios que hiciste en tus ficheros y en tu repo, no lo olvides. Elimina primero los instaladores .deb que descargaste en codespaces, ya que GitHub no permite archivos mayores de 100 MB.
+- Ahora sí mamón, esto es super importante para que guardes en GitHub todos los cambios que hiciste en tus ficheros y en tu repo, no lo olvides. Elimina primero los instaladores .deb que descargaste en codespaces, ya que GitHub no permite archivos mayores de 100 MB. No olvides chiquillo, dada vez que termines una sesión de trabajo:
 
 ```{.bash}
 git add .
@@ -238,3 +238,7 @@ git push
 
 - cuando ya tengas la estructura básica de tu libro usa los dos últimos comandos del siguiente bloque:
 
+```{.bash}
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ $ quarto render
+@yachasun40 ➜ /workspaces/power_systems_analysis (main) $ $ quarto publish gh-pages
+```
